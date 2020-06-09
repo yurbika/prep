@@ -31,6 +31,7 @@ function josephus(items, k) {
 }
 
 //my solution
+//behandelt nicht alle fälle zum beispiel [true,false,true,false]
 function josephus(items, k) {
   let arr = [];
   let arr2 = [];
@@ -51,3 +52,35 @@ function josephus(items, k) {
   }
   return arr;
 }
+
+//other version we only get numbers
+
+// josephus_survivor(7,3) => means 7 people in a circle;
+// one every 3 is eliminated until one remains
+// [1,2,3,4,5,6,7] - initial sequence
+// [1,2,4,5,6,7] => 3 is counted out
+// [1,2,4,5,7] => 6 is counted out
+// [1,4,5,7] => 2 is counted out
+// [1,4,5] => 7 is counted out
+// [1,4] => 5 is counted out
+// [4] => 1 counted out, 4 is the last element - the survivor!
+
+//solution with recursion
+function josephusSurvivor(n, k) {
+  return n < 1 ? 1 : ((josephusSurvivor(n - 1, k) + --k) % n) + 1;
+}
+
+//n = 11 k = 19
+
+// 11 19 12     return 10
+// 10 19 11     4 + 18 % 12 = 10
+// 9 19 10      8 + 18 % 11 = 4
+// 8 19 9       0 + 18 % 10 = 8
+// 7 19 8       0 + 18 % 9 = 0
+// 6 19 7       6 + 18 % 8 = 0
+// 5 19 6       1 + 18 % 7 = 6
+// 4 19 5       1 + 18 % 6 = 1
+// 3 19 4       3 + 18 % 5 = 1
+// 2 19 3       1 + 18 % 4 = 3
+// 1 19 2       1 + 18 % 2 = 1
+// 0 19 1       return 1
