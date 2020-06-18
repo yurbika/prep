@@ -7,7 +7,7 @@ const rnd = (min, max) => {
 };
 
 const mult = rnd(0.01, 0.1);
-const totalLevel = 3;
+const totalLevel = 5;
 let sway = 0;
 
 //creates position of every group which stacks on eachother
@@ -47,6 +47,8 @@ const Branch = ({ len, ang, gen }) => {
       //each group has a path to scale
       React.createElement("path", {
         d: "M0,0 v-30 l3,-3 l3,3 v30 z",
+        id: "path" + gen,
+
         style: {
           strokeWidth: 0.1,
           fill: "#939ca7",
@@ -68,6 +70,8 @@ const Branch = ({ len, ang, gen }) => {
       //each group has a path to scale
       React.createElement("path", {
         d: "M0,0 v-30 l3,-3 l3,3 v30 z",
+        id: "path" + gen,
+
         style: {
           strokeWidth: 0.1,
           fill: "#939ca7",
@@ -82,6 +86,7 @@ const Branch = ({ len, ang, gen }) => {
     //each group has a path to scale
     React.createElement("path", {
       d: "M0,0 v-30 l3,-3 l3,3 v30 z",
+      id: "path" + gen,
       style: {
         strokeWidth: 0.1,
         fill: "#939ca7",
@@ -97,29 +102,34 @@ class Tree extends React.Component {
   componentDidMount() {
     var test = Elastic.easeOut.config(1, 0.3);
     gsap.timeline().from("#gen0", {
-      duration: 3.4,
+      duration: rnd(3.5, 3.8),
       transformOrigin: "50% bottom",
       scaleY: 0,
       ease: test,
     });
-    gsap.timeline().from("#gen1", {
-      duration: 0.4,
+    gsap.timeline().from("#gen0 #path0", {
+      duration: 0.6,
       transformOrigin: "50% bottom",
       scaleY: 0,
-      ease: test,
     });
-    gsap.timeline().from("#gen2", {
-      duration: 0.4,
-      transformOrigin: "50% bottom",
-      scaleY: 0,
-      ease: test,
-    });
-    gsap.timeline().from("#gen3", {
-      duration: 0.4,
-      transformOrigin: "50% bottom",
-      scaleY: 0,
-      ease: test,
-    });
+
+    for (let i = 1; i < totalLevel + 1; i++) {
+      gsap.timeline().from("#gen" + i + " #path" + i, {
+        delay: 0.6 + i,
+        duration: 0.6,
+        transformOrigin: "50% bottom",
+        scaleY: 0,
+      });
+    }
+
+    for (let i = 1; i < totalLevel + 1; i++) {
+      gsap.timeline().from("#gen" + i, {
+        duration: rnd(0.7, 0.8),
+        transformOrigin: "50% bottom",
+        scaleY: 0,
+        ease: test,
+      });
+    }
   }
 
   componentDidUpdate() {
