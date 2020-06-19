@@ -2,18 +2,20 @@ import React from "react";
 import gsap from "gsap";
 import { Elastic } from "gsap/gsap-core";
 
+import bild from "./html5.svg";
+
 const rnd = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
-const mult = rnd(0.01, 0.1);
+const mult = rnd(-31, 31);
 const totalLevel = 5;
 let sway = 0;
 
 //creates position of every group which stacks on eachother
 const posOfG = ({ len, ang, gen }) => {
   //rotation in deg
-  if (gen === 0) sway++;
+  sway++;
   const rotation =
     ang + (((Math.sin(sway * mult) * Math.PI) / 128) * 180) / Math.PI;
   const style = {
@@ -25,7 +27,9 @@ const posOfG = ({ len, ang, gen }) => {
         ? `
         ${"scale(" + 3.5 + ")"} rotate(${rotation},0,0)`
         : //translate values are depending on the path values
-          `translate(0.35,-28.8) ${"scale(0.87)"} rotate(${rotation},0,0)`,
+          `translate(0.35,-28.8) ${
+            "scale(" + rnd(0.8, 0.9) + ")"
+          } rotate(${rotation},0,0)`,
   };
 
   return style;
@@ -103,7 +107,8 @@ class Tree extends React.Component {
     var test = Elastic.easeOut.config(1, 0.3);
     gsap.timeline().from("#gen0", {
       duration: 2,
-      transformOrigin: "50% bottom",
+      transformOrigin: "bottom 50%",
+
       scaleY: 0,
       ease: test,
     });
@@ -139,7 +144,8 @@ class Tree extends React.Component {
     var test = Elastic.easeOut.config(1, 0.3);
     gsap.timeline().from("#gen0", {
       duration: 2,
-      transformOrigin: "50% bottom",
+      transformOrigin: "bottom 50%",
+
       scaleY: 0,
       ease: test,
     });
