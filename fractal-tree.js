@@ -2,14 +2,14 @@ import React from "react";
 import gsap from "gsap";
 import { Elastic } from "gsap/gsap-core";
 
-import bild from "./html5.svg";
+import { ReactComponent as Bild } from "./html5.svg";
 
 const rnd = (min, max) => {
   return Math.random() * (max - min) + min;
 };
 
 const mult = rnd(-31, 31);
-const totalLevel = 5;
+const totalLevel = 7;
 let sway = 0;
 
 //creates position of every group which stacks on eachother
@@ -25,9 +25,11 @@ const posOfG = ({ len, ang, gen }) => {
     transform:
       gen === 0
         ? `
-        ${"scale(" + 3.5 + ")"} rotate(${rotation},0,0)`
+        ${"scale(" + 3 + ")"} rotate(${rotation},0,0)`
         : //translate values are depending on the path values
-          `translate(0.35,-28.8) ${
+        gen === totalLevel
+        ? `translate(0.35,-50.8) ${"scale(0.35)"} rotate(${rotation},0,0)`
+        : `translate(0.35,-28.8) ${
             "scale(" + rnd(0.8, 0.9) + ")"
           } rotate(${rotation},0,0)`,
   };
@@ -47,18 +49,7 @@ const Branch = ({ len, ang, gen }) => {
         { ang: rnd(0, 50) },
         { gen: gen + 1 },
         { key: rnd(0, 1110004239042390482034820480293429034) }
-      ),
-      //each group has a path to scale
-      React.createElement("path", {
-        d: "M0,0 v-30 l3,-3 l3,3 v30 z",
-        id: "path" + gen,
-
-        style: {
-          strokeWidth: 0.1,
-          fill: "#939ca7",
-        },
-        key: rnd(0, 1110004239042390482034820480293429034),
-      })
+      )
     );
 
   const right =
@@ -70,40 +61,36 @@ const Branch = ({ len, ang, gen }) => {
         { ang: rnd(0, -50) },
         { gen: gen + 1 },
         { key: rnd(0, 1110004239042390482034820480293429034) }
-      ),
-      //each group has a path to scale
-      React.createElement("path", {
-        d: "M0,0 v-30 l3,-3 l3,3 v30 z",
-        id: "path" + gen,
-
-        style: {
-          strokeWidth: 0.1,
-          fill: "#939ca7",
-        },
-        key: rnd(0, 1110004239042390482034820480293429034),
-      })
+      )
     );
 
   return React.createElement(
     "g",
     style,
     //each group has a path to scale
-    React.createElement("path", {
-      d: "M0,0 v-30 l3,-3 l3,3 v30 z",
-      id: "path" + gen,
-      style: {
-        strokeWidth: 0.1,
-        fill: "#939ca7",
-      },
-      key: rnd(0, 1110004239042390482034820480293429034),
-    }),
+    //last branch should be a logo
+    gen === totalLevel ? (
+      <Bild id={"path" + gen} />
+    ) : (
+      React.createElement("path", {
+        d: "M0,0 v-30 l3,-3 l3,3 v30 z",
+        id: "path" + gen,
+        style: {
+          strokeWidth: 0.1,
+          fill: "#939ca7",
+        },
+        key: rnd(0, 1110004239042390482034820480293429034),
+      })
+    ),
     left,
     right
   );
 };
 
 class Tree extends React.Component {
-  componentDidMount() {
+  animation = () => {
+    //grow animation and slowy drawing animation
+    //g needs to be scaled while path needs to be drawn
     var test = Elastic.easeOut.config(1, 0.3);
     gsap.timeline().from("#gen0", {
       duration: 2,
@@ -118,63 +105,47 @@ class Tree extends React.Component {
       scaleY: 0,
     });
     for (let i = 1; i < totalLevel + 1; i++) {
-      gsap
-        .timeline()
-        .timeScale(10)
-        .from("#gen" + i, {
-          delay: 0.4,
-          duration: 0.6,
-          transformOrigin: "50% bottom",
-          scaleY: 0.5,
-          ease: test,
-        });
-      gsap
-        .timeline()
-        .timeScale(15)
-        .from("#gen" + i + " #path" + i, {
-          delay: 0.4 + i,
-          duration: 0.6,
-          transformOrigin: "50% bottom",
-          scaleY: 0,
-        });
+      if (totalLevel > i) {
+        gsap
+          .timeline()
+          .timeScale(10)
+          .from("#gen" + i, {
+            delay: 0.4,
+            duration: 0.6,
+            transformOrigin: "50% bottom",
+            scaleY: 0.5,
+            ease: test,
+          });
+        gsap
+          .timeline()
+          .timeScale(15)
+          .from("#gen" + i + " #path" + i, {
+            delay: 0.4 + i,
+            duration: 0.6,
+            transformOrigin: "50% bottom",
+            scaleY: 0,
+          });
+      } else {
+        //logo animation
+        gsap
+          .timeline()
+          .timeScale(15)
+          .from(`#gen${totalLevel} #path${totalLevel} g`, {
+            delay: 0.4 + i,
+            duration: 4,
+            transformOrigin: "50% bottom",
+            scale: 0,
+          });
+      }
     }
+  };
+
+  componentDidMount() {
+    this.animation();
   }
 
   componentDidUpdate() {
-    var test = Elastic.easeOut.config(1, 0.3);
-    gsap.timeline().from("#gen0", {
-      duration: 2,
-      transformOrigin: "bottom 50%",
-
-      scaleY: 0,
-      ease: test,
-    });
-    gsap.timeline().from("#gen0 #path0", {
-      duration: 0.1,
-      transformOrigin: "50% bottom",
-      scaleY: 0,
-    });
-    for (let i = 1; i < totalLevel + 1; i++) {
-      gsap
-        .timeline()
-        .timeScale(10)
-        .from("#gen" + i, {
-          delay: 0.4,
-          duration: 0.6,
-          transformOrigin: "50% bottom",
-          scaleY: 0.5,
-          ease: test,
-        });
-      gsap
-        .timeline()
-        .timeScale(15)
-        .from("#gen" + i + " #path" + i, {
-          delay: 0.4 + i,
-          duration: 0.6,
-          transformOrigin: "50% bottom",
-          scaleY: 0,
-        });
-    }
+    this.animation();
   }
 
   render() {
