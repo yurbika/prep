@@ -2,7 +2,16 @@ import React from "react";
 import gsap from "gsap";
 import { Elastic } from "gsap/gsap-core";
 
-import { ReactComponent as Bild } from "./svg/html5.svg";
+import { ReactComponent as Html5 } from "./svg/html5.svg";
+import { ReactComponent as ReactSvg } from "./svg/react.svg";
+import { ReactComponent as Css } from "./svg/css.svg";
+import { ReactComponent as Npm } from "./svg/npm.svg";
+import { ReactComponent as Redux } from "./svg/redux.svg";
+import { ReactComponent as Rr } from "./svg/rr.svg";
+import { ReactComponent as Sass } from "./svg/sass.svg";
+import { ReactComponent as Js } from "./svg/js.svg";
+import { ReactComponent as Git } from "./svg/git.svg";
+import { ReactComponent as Sc } from "./svg/sc.svg";
 
 const rnd = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -11,6 +20,7 @@ const rnd = (min, max) => {
 const mult = rnd(-31, 31);
 const totalLevel = 7;
 let sway = 0;
+let logoArr = [Html5, ReactSvg, Css, Npm, Redux, Rr, Sass, Js, Git, Sc];
 
 //creates position of every group which stacks on eachother
 const posOfG = ({ len, ang, gen }) => {
@@ -28,9 +38,9 @@ const posOfG = ({ len, ang, gen }) => {
         ${"scale(" + 3 + ")"} rotate(${rotation},0,0)`
         : //translate values are depending on the path values
         gen === totalLevel
-        ? `translate(-15,-65) ${"scale(0.35)"} rotate(0,0,0)`
+        ? `translate(-22,-65) ${"scale(0.5)"} rotate(0,0,0)`
         : `translate(0.35,-28.8) ${
-            "scale(" + rnd(0.8, 0.9) + ")"
+            "scale(" + len + ")"
           } rotate(${rotation},0,0)`,
   };
 
@@ -45,7 +55,7 @@ const Branch = ({ len, ang, gen }) => {
     React.createElement(
       Branch,
       Object.assign(
-        { len: len * rnd(0.8, 0.99) },
+        { len: rnd(0.8, 0.9) },
         { ang: rnd(0, 50) },
         { gen: gen + 1 },
         { key: rnd(0, 1110004239042390482034820480293429034) }
@@ -57,7 +67,7 @@ const Branch = ({ len, ang, gen }) => {
     React.createElement(
       Branch,
       Object.assign(
-        { len: len * rnd(0.8, 0.99) },
+        { len: rnd(0.8, 0.9) },
         { ang: rnd(0, -50) },
         { gen: gen + 1 },
         { key: rnd(0, 1110004239042390482034820480293429034) }
@@ -69,19 +79,19 @@ const Branch = ({ len, ang, gen }) => {
     style,
     //each group has a path to scale
     //last branch should be a logo
-    gen === totalLevel ? (
-      <Bild id={"path" + gen} />
-    ) : (
-      React.createElement("path", {
-        d: "M0,0 v-30 l3,-3 l3,3 v30 z",
-        id: "path" + gen,
-        style: {
-          strokeWidth: 0.1,
-          fill: "#939ca7",
-        },
-        key: rnd(0, 1110004239042390482034820480293429034),
-      })
-    ),
+    gen === totalLevel
+      ? React.createElement(logoArr[Math.round(rnd(0, logoArr.length - 1))], {
+          id: "path" + gen,
+        })
+      : React.createElement("path", {
+          d: "M0,0 v-30 l3,-3 l3,3 v30 z",
+          id: "path" + gen,
+          style: {
+            strokeWidth: 0.1,
+            fill: "#939ca7",
+          },
+          key: rnd(0, 1110004239042390482034820480293429034),
+        }),
     left,
     right
   );
