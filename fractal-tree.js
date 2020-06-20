@@ -2,7 +2,7 @@ import React from "react";
 import gsap from "gsap";
 import { Elastic } from "gsap/gsap-core";
 
-import { ReactComponent as Bild } from "./html5.svg";
+import { ReactComponent as Bild } from "./svg/html5.svg";
 
 const rnd = (min, max) => {
   return Math.random() * (max - min) + min;
@@ -28,7 +28,7 @@ const posOfG = ({ len, ang, gen }) => {
         ${"scale(" + 3 + ")"} rotate(${rotation},0,0)`
         : //translate values are depending on the path values
         gen === totalLevel
-        ? `translate(0.35,-50.8) ${"scale(0.35)"} rotate(${rotation},0,0)`
+        ? `translate(-15,-65) ${"scale(0.35)"} rotate(0,0,0)`
         : `translate(0.35,-28.8) ${
             "scale(" + rnd(0.8, 0.9) + ")"
           } rotate(${rotation},0,0)`,
@@ -39,7 +39,7 @@ const posOfG = ({ len, ang, gen }) => {
 
 const Branch = ({ len, ang, gen }) => {
   const style = posOfG({ len, ang, gen });
-  //each branch has a left and right child
+  //each branch has a left and right child except the last gen because of the logos
   const left =
     gen < totalLevel &&
     React.createElement(
@@ -53,7 +53,7 @@ const Branch = ({ len, ang, gen }) => {
     );
 
   const right =
-    gen < totalLevel &&
+    gen < totalLevel - 1 &&
     React.createElement(
       Branch,
       Object.assign(
@@ -118,7 +118,7 @@ class Tree extends React.Component {
           });
         gsap
           .timeline()
-          .timeScale(15)
+          .timeScale(10)
           .from("#gen" + i + " #path" + i, {
             delay: 0.4 + i,
             duration: 0.6,
@@ -129,7 +129,7 @@ class Tree extends React.Component {
         //logo animation
         gsap
           .timeline()
-          .timeScale(15)
+          .timeScale(10)
           .from(`#gen${totalLevel} #path${totalLevel} g`, {
             delay: 0.4 + i,
             duration: 4,
