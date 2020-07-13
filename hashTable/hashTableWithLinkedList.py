@@ -64,4 +64,4 @@ p["march 6"] = "a"
 p["march 17"] = "b"
 
 
-print(p["march 17"])
+print(p.arr)
