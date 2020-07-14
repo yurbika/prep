@@ -12,7 +12,6 @@ arr = list(string)
 i = len(arr) - 1
 j = i
 
-#skip buffer
 while arr[i] == " ":
     i-=1
 
