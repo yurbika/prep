@@ -9,12 +9,12 @@ def sortString(string):
 print(sortString(string) == sortString(string2))
 
 
-#my understanding of two strings is, given two ascii strings 
+#Given two strings s1 and s2, write a function to return true if s2 contains the permutation of s1. In other words, one of the first string's permutations is the substring of the second string. Also LeetCode Problem ID: 567
 
 s2 = "eidboaooo"
 s1 = "ab"
 
-def checkInclusion( s1, s2):
+def checkInclusion(s1, s2):
     A = [ord(x) - ord('a') for x in s1]
     B = [ord(x) - ord('a') for x in s2]
     target = [0] * 26
