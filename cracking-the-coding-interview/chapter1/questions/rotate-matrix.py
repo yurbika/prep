@@ -1,30 +1,28 @@
+#in place swap -> no additional array 
+
 arr = [
-[1,2,3],
-[4,5,6],
-[7,8,9]
+[1,2,3,4,5],
+[6,7,8,9,10],
+[11,12,13,14,15],
+[16,17,18,19,20],
+[21,22,23,24,25],
+
 ]
 
-def rotate(arr):
-    temp = 0
-    temp2 = 0
-    counter = 0
+length = len(arr)
 
-    for i in range(1):
-        for j in range(len(arr)-1): 
-            temp = arr[i][len(arr) - 1 - j]
-            arr[i][len(arr) - 1 - j] = arr[i][j]
+for i in range(length):
+    for j in range(i,length):
+        temp = arr[i][j]
+        arr[i][j] = arr[j][i]
+        arr[j][i] = temp
 
-            temp2 = arr[len(arr) - 1][len(arr) - 1]
-            arr[len(arr) - 1][len(arr) - 1] = temp
+for i in range(length):
+    for j in range(round(length/2)):
+        temp = arr[i][j]
+        arr[i][j] = arr[i][length - 1 - j]
+        arr[i][length - 1 - j] = temp
 
-            temp = arr[len(arr) - 1 - j][0]
-            arr[len(arr) - 1 - j][0] = temp2
-
-            arr[i][j] = temp
-            
-            
+print(arr)
 
 
-    return arr
-
-print(rotate(arr))
