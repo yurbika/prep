@@ -61,7 +61,7 @@ class LinkedList:
         n.next = node
         node.prev = n
 
-    def insert_between(self,node,targetNode):
+    def insert_before(self,node,targetNode):
         n = self.head
         if targetNode == self.head:
             return self.insert_front(node)
@@ -75,43 +75,66 @@ class LinkedList:
         n.next.prev = node
         n.next = node
         node.prev = n
-        
-        
 
 llist = LinkedList()
 
-one = Node(1)
-two = Node(2)
-three = Node(3)
-four = Node(4)
-five = Node(5)
-six = Node(6)
-seven = Node(7)
-eight = Node(8)
-nine = Node(9)
-
+one = Node("a1")
+two = Node("a2")
+three = Node("a3")
+four = Node("a4")
+five = Node("a5")
+six = Node("b1")
+seven = Node("b2")
+eight = Node("b3")
+nine = Node("b4")
+ten = Node("b5")
 
 one.next = two
 two.next = three
 three.next = four
 four.next = five
 five.next = six
-
-two.prev = one
-three.prev = two
-four.prev = three
-five.prev = four
-six.prev = five
+six.next = seven
+seven.next = eight
+eight.next = nine
+nine.next = ten
 
 llist.head = one
 
-#llist.deleteNode(5)
-#llist.insert_front(seven)
-#llist.insert_end(eight)
-llist.insert_between(eight,one)
+p2 = llist.head
+p1 = p2.next
 
 
-print(llist,eight.prev, eight.next,one.prev,one.next)
+while p1.next is not None:
+    p2 = p2.next
+    p1 = p1.next.next
+
+p1 = llist.head
+p2 = p2.next
+temp = llist.head
+n1 = ""
+n2 = ""
+
+while p2 is not None:
+    while temp is not None:
+        if temp.next == p1.next:
+            n1 = temp
+        if temp.next == p2:
+            n2 = temp
+        temp = temp.next
 
 
-        
+    temp = p1.next
+    linkAfter1 = p1.next.next
+    linkAfter2 = p2.next
+    n1.next = p2
+    n2.next = temp
+    p2.next = linkAfter1
+    temp.next = linkAfter2
+    p2 = temp
+
+    p1 = p1.next.next
+    p2 = p2.next
+    
+
+print(llist)
