@@ -33,16 +33,16 @@ class LinkedList:
 
 llist = LinkedList()
 
-one = Node("a1")
-two = Node("a2")
-three = Node("a3")
-four = Node("a4")
-five = Node("a5")
-six = Node("b1")
-seven = Node("b2")
-eight = Node("b3")
-nine = Node("b4")
-ten = Node("b5")
+one = Node(1)
+two = Node(1)
+three = Node(1)
+four = Node(1)
+five = Node(1)
+six = Node(1)
+seven = Node(1)
+eight = Node(2)
+nine = Node(1)
+ten = Node(1)
 
 one.next = two
 two.next = three
@@ -57,36 +57,30 @@ nine.next = ten
 llist.head = one
 
 p2 = llist.head
-p1 = p2.next
+p1 = llist.head.next
 
-print(llist)
-
-while p1.next is not None:
-    p2 = p2.next
-    p1 = p1.next.next
-
-p1 = llist.head
-p2 = p2.next
-n1 = ""
-n2 = ""
-
-while p2.next is not None :
-    temp = llist.head
-    while temp is not None:
-        if temp.next == p1.next:
-            n1 = temp
-        if temp.next == p2:
-            n2 = temp
-        temp = temp.next
-
-    linkAfterP2 = p2.next
-    temp = p1.next
-    n1.next = p2
-    p2.next = temp
-    n2.next = linkAfterP2
-    p2 = n2
-    p1 = p1.next.next
-    p2 = p2.next
+def deleteNode(node):
+    head = llist.head
+    while head is not None:
+        if head.next == node:
+            break
+        head = head.next
+    head.next = head.next.next
     
+
+
+while p2 is not None:
+    p1 = p2.next
+
+    while p1 is not None:
+        if p1.next is not None and p1.next.val == p2.val:
+            deleteNode(p1.next)
+        elif p1.val == p2.val:
+            deleteNode(p1)
+            p1 = p1.next
+        else:
+            p1 = p1.next
+
+    p2 = p2.next
 
 print(llist)
