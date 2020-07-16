@@ -111,11 +111,11 @@ while p1.next is not None:
 
 p1 = llist.head
 p2 = p2.next
-temp = llist.head
 n1 = ""
 n2 = ""
 
-while p2 is not None:
+while p2.next is not None :
+    temp = llist.head
     while temp is not None:
         if temp.next == p1.next:
             n1 = temp
@@ -123,16 +123,12 @@ while p2 is not None:
             n2 = temp
         temp = temp.next
 
-
+    linkAfterP2 = p2.next
     temp = p1.next
-    linkAfter1 = p1.next.next
-    linkAfter2 = p2.next
     n1.next = p2
-    n2.next = temp
-    p2.next = linkAfter1
-    temp.next = linkAfter2
-    p2 = temp
-
+    p2.next = temp
+    n2.next = linkAfterP2
+    p2 = n2
     p1 = p1.next.next
     p2 = p2.next
     
