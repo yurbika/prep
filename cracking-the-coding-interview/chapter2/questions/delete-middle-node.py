@@ -73,13 +73,15 @@ six.prev = five
 
 llist.head = one
 
-llist.deleteNode(2)
-llist.deleteNode(3)
-llist.deleteNode(4)
-llist.deleteNode(5)
-llist.deleteNode(6)
+def deleteNode(node):
+    temp = node.next
+    node.val = temp.val
+    if node.next is not None:
+        node.next = node.next.next
+    else:
+        node.next = None
 
-
+deleteNode(one)
 
 print(llist)
 
