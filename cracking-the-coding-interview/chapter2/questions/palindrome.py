@@ -29,34 +29,6 @@ class LinkedList:
         nodes.append("None")
         return "->".join(nodes)
 
-    def deleteNode(self,value):
-        node = self.head
-
-        while node is not None:    
-            if node.val == value:
-                self.head = node.next
-                return None
-
-            if node.next.val == value:
-                node.next = node.next.next
-                return None
-
-            node = node.next
-
-    def insert_front(self,node):
-        head = self.head
-        self.head = node
-        self.head.next = head
-        head.prev = self.head
-
-    def insert_end(self,node):
-        n = self.head
-        while n is not None:
-            if n.next == None:
-                break
-            n = n.next
-        n.next = node
-        node.prev = n
 
 llist = LinkedList()
 
