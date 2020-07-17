@@ -70,33 +70,33 @@ num2.head = num2digit1
 
 n1 = num1.head
 n2 = num2.head
-intersetion = False
+intersection = False
 
 while n1 is not None:
     n2 = num2.head
-    if intersetion:
+    if intersection:
         break
 
     while n2 is not None:
         if n1 == n2:
             print(f"intersection Node: {n1}")
-            intersetion = True
+            intersection = True
             break
         n2 = n2.next
     n1 = n1.next
 
 n1 = num1.head
 n2 = num2.head
-intersetion = False
+intersection = False
 
 while n2 is not None:
     n1 = num2.head.next
-    if intersetion:
+    if intersection:
         break
     while n1 is not None:
         if n1 == n2:
             print(f"intersection Node: {n1}")
-            intersetion = True
+            intersection = True
             break
         n1 = n1.next
     n2 = n2.next
