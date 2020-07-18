@@ -73,10 +73,13 @@ temp.popAt(1)
 temp.popAt(1)
 temp.popAt(1)
 temp.popAt(1)
-# temp.popAt(1)
-# temp.popAt(1)
-# temp.popAt(1)
-# temp.popAt(1)
+#temp = [[1,2,3],[4,5,11],[11]]
+
+temp.popAt(1)
+temp.popAt(1)
+temp.popAt(1)
+temp.popAt(1)
+
 #temp = [1,2,3]
 
 print(temp)
