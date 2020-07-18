@@ -30,6 +30,11 @@ class Queue:
         n = self.head
         if self.is_empty():
             return None
+        if n.next is None:
+            temp = n.val
+            n.val = None
+            n = None
+            return temp
         while n.next.next is not None:
             n = n.next
         temp = n.next.val
@@ -62,4 +67,4 @@ test.push(4)
 
 print(test)
 
-print(test.remove(),test)
+print(test.remove(),test.remove(),test.remove(),test.remove(),test)
