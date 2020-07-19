@@ -64,3 +64,17 @@ s1.push(89)
 
 
 print(s1)
+
+
+def sortStack(s1,s2):
+    temp = None
+    while not s1.is_empty():
+        temp = s1.pop()
+
+        while not s2.is_empty() and s1.peek() > temp:
+            s2.push(s1.pop())
+        s1.push(temp)
+
+    while not s2.is_empty():
+        s1.push(s2.pop)
+            
