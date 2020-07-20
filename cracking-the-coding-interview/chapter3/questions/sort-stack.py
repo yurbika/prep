@@ -56,6 +56,7 @@ s1.push(981)
 s1.push(21)
 s1.push(64)
 s1.push(31)
+s1.push(981)
 s1.push(27)
 s1.push(55)
 s1.push(89)
@@ -71,10 +72,25 @@ def sortStack(s1,s2):
     while not s1.is_empty():
         temp = s1.pop()
 
-        while not s2.is_empty() and s1.peek() > temp:
-            s2.push(s1.pop())
-        s1.push(temp)
+        if s2.is_empty():
+            s2.push(temp)
 
-    while not s2.is_empty():
-        s1.push(s2.pop)
+        elif temp > s2.peek():
+            cnt = 0
+            while not s2.is_empty() and temp > s2.peek():
+                s1.push(s2.pop())
+                cnt += 1
             
+            s2.push(temp)
+
+            while cnt != 0:
+                s2.push(s1.pop())
+                cnt -= 1
+
+        else:
+            s2.push(temp)
+
+            
+sortStack(s1,s2)
+
+print(s2)
