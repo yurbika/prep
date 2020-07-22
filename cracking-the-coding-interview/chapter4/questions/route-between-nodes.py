@@ -63,9 +63,7 @@ graph = {
 'I':['Z']
 }
 
-#find f | start from a
-    
-
+#recursive way dfs
 def dfs(graph,visited,node,target):
     if node not in visited and node in graph:
         visited.append(node)
@@ -76,3 +74,21 @@ def dfs(graph,visited,node,target):
     return target in visited
 
 print(dfs(graph,[],'A','Z'))
+
+#iterative dfs
+def dfs(graph,node,target):
+    stack = [node]
+    visited = []
+
+    while stack:
+        curr = stack.pop(0)
+        if curr == target:
+            return True
+        if curr not in visited:
+            visited.append(curr)
+            stack = graph.get(curr,[]) + stack
+
+    return False
+
+
+print(dfs(graph,'A','Z'))
