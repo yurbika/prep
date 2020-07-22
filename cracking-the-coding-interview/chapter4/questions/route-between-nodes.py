@@ -1,7 +1,7 @@
 class Node:
     def __init__(self,val):
         self.val = val
-        self._next = None
+        self.next = None
 
     def __repr__(self):
         return self.val
@@ -63,6 +63,9 @@ graph = {
 'I':['Z']
 }
 
+start = 'I'
+target = 'A'
+
 #recursive way dfs
 def dfs(graph,visited,node,target):
     if node not in visited and node in graph:
@@ -73,7 +76,7 @@ def dfs(graph,visited,node,target):
         visited.append(node)
     return target in visited
 
-print(dfs(graph,[],'A','Z'))
+print("recursive dfs: ",dfs(graph,[],start,target))
 
 #iterative dfs
 def dfs(graph,node,target):
@@ -91,4 +94,29 @@ def dfs(graph,node,target):
     return False
 
 
-print(dfs(graph,'A','Z'))
+print("iterative dfs: ",dfs(graph,start,target))
+
+
+def bfs(graph,node,target):
+    queue = Queue()
+    queue.head = Node(node)
+    visited = []
+    curr = queue.remove()
+
+    while not queue.is_empty() and curr:
+        if curr == target:
+            return True
+        tempArr = (graph.get(curr,[]))[:]
+        while tempArr:
+            queue.push(tempArr.pop(0))
+        if curr not in visited:
+            visited.append(curr)
+            curr = queue.remove()
+            if curr == None:
+                curr = queue.remove()
+
+        else:
+            curr = queue.remove()
+    return False
+
+print("bfs: ",bfs(graph,start,target))
