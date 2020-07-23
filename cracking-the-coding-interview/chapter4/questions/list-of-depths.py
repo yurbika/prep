@@ -145,24 +145,16 @@ def listOfDepths(root):
     solution = []
     queue = []
     queue.append(root.val)
-    level = 0
     while queue:
-        if level == 0:
-            llist = LinkedList()
-            llist.head = queue.pop(0)
-            solution.append(llist)
-            queue += [root.left.val, root.right.val]
-            level += 1
-        else:
-            temp = []
-            for i in queue:
-                temp += getChildren(root, i, [])
-            llist = LinkedList()
-            llist.head = Node(queue.pop(0))
-            while queue:
-                llist.insert_end(Node(queue.pop(0)))
-            queue = temp[:]
-            solution.append(llist)
+        temp = []
+        for i in queue:
+            temp += getChildren(root, i, [])
+        llist = LinkedList()
+        llist.head = Node(queue.pop(0))
+        while queue:
+            llist.insert_end(Node(queue.pop(0)))
+        queue = temp[:]
+        solution.append(llist)
     return solution
 
 
