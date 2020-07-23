@@ -1,7 +1,7 @@
 import random
 
 
-arr = [*(random.randint(1, 1000) for _ in range(10))]
+arr = [*(random.randint(1, 1000) for _ in range(27))]
 
 arr.sort()
 
@@ -14,6 +14,7 @@ class Node:
         self.right = None
         self.val = key
 
+    # https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python
     def display(self):
         lines, *_ = self._display_aux()
         for line in lines:
