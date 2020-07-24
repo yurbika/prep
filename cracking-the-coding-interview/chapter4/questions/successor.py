@@ -1,3 +1,6 @@
+import unittest
+
+
 class NodeB:
     def __init__(self, key):
         self.left = None
@@ -128,4 +131,23 @@ def successor(node):
     return successor
 
 
-print(successor(root.right.right))
+class Test(unittest.TestCase):
+    def test_successor(self):
+        self.assertEqual(successor(root), 36)
+        self.assertEqual(successor(root.left), 31)
+        self.assertEqual(successor(root.right), 46)
+        self.assertEqual(successor(root.left.left), 30)
+        self.assertEqual(successor(root.left.left.left), 27)
+        self.assertEqual(successor(root.left.right), 34)
+        self.assertEqual(successor(root.left.right.left), 33)
+        self.assertEqual(successor(root.left.right.right), 35)
+        self.assertEqual(successor(root.right.left), 39)
+        self.assertEqual(successor(root.right.right), 60)
+        self.assertEqual(successor(root.right.left.left), 37)
+        self.assertEqual(successor(root.right.left.right), 40)
+        self.assertEqual(successor(root.right.right.right), None)
+        self.assertEqual(successor(root.right.right.left), 50)
+        self.assertEqual(successor(root.right.right.left.left), 49)
+
+
+unittest.main()
