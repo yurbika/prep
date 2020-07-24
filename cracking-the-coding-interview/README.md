@@ -1,11 +1,11 @@
 # Cracking the Coding Interview Overview
 
-## Solution in Python
+**Solution in Python**
 
-1. [Chapter 1 - Arrays and Strings](cracking-the-coding-interview/chapter1): `9 / 9` complete.
-2. [Chapter 2 - Linked Lists](cracking-the-coding-interview/chapter2): `8 / 8` complete.
-3. [Chapter 3 - Stacks and Queues](cracking-the-coding-interview/chapter3): `6 / 6` complete.
-4. [Chapter 4 - Trees and Graphs](cracking-the-coding-interview/chapter4): `9 / 12` complete.
+1. [Chapter 1 - Arrays and Strings](chapter1): `9 / 9` complete.
+2. [Chapter 2 - Linked Lists](chapter2): `8 / 8` complete.
+3. [Chapter 3 - Stacks and Queues](chapter3): `6 / 6` complete.
+4. [Chapter 4 - Trees and Graphs](chapter4): `9 / 12` complete.
 5. Chapter 5 - Bit Manipulation: `0/ 8` complete.
 6. Chapter 6 - Math and Logic: `N/A` complete.
 7. Chapter 7 - Object Oriented Design: `0 / 12` complete.
