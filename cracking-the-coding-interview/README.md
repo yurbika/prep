@@ -1,4 +1,6 @@
-# Introduction
+# Cracking the Coding Interview Overview
+<hr>
+## Solution in Python
 
 1. [Chapter 1 - Arrays and Strings](prep/cracking-the-coding-interview/chapter1): `9 / 9` complete.
 2. [Chapter 2 - Linked Lists](prep/cracking-the-coding-interview/chapter2): `8 / 8` complete.
@@ -8,7 +10,7 @@
 6. Chapter 6 - Math and Logic: `N/A` complete.
 7. Chapter 7 - Object Oriented Design: `0 / 12` complete.
 8. Chapter 8 - Recursion and Dynamic Programming: `0 / 14` complete.
-9. Chapter 9 - System Design and Scalability: `0 / 8` complete.
+9. Chapter 9 - System Design and Scalability: `N/A` complete.
 10. Chapter 10 - Sorting and Searching: `0 / 11` complete.
 11. Chapter 11 - Testing: `0 / 6` complete.
 12. Chapter 12 - C and C++: `N/A`
