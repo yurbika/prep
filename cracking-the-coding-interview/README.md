@@ -1,5 +1,5 @@
 # Cracking the Coding Interview Overview
-<hr>
+
 ## Solution in Python
 
 1. [Chapter 1 - Arrays and Strings](prep/cracking-the-coding-interview/chapter1): `9 / 9` complete.
