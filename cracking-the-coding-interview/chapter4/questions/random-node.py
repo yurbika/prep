@@ -59,18 +59,6 @@ class NodeB:
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
 
-t2 = NodeB(4)
-t2.left = NodeB(1)
-t2.right = NodeB(5)
-
-# left side
-t2.left.left = NodeB(0)
-t2.left.right = NodeB(2)
-
-# right side
-t2.right.right = NodeB(6)
-
-
 class Bts:
     def __init__(self):
         self.root = None
@@ -100,23 +88,29 @@ class Bts:
         else:
             self._insert(val, self.root)
 
+    def _find(self, root, val, found):
+        if not root:
+            return False
+
+        if val == root.val:
+            return True
+
+        found = self._find(root.left, val, False)
+        found = self._find(root.right, val, False)
+
+        return found
+
     def find(self, val):
-        pass
+        if self._find(self.root, val, False):
+            return f"{val} is in the Tree"
+        else:
+            return f"{val} is not in the Tree"
 
     def delete(self, val):
         pass
 
     def getRandomNode(self):
         pass
-
-
-# bts = Bts()
-# bts.root = t2
-
-# print(bts)
-
-# bts.insert(-7)
-# print(bts)
 
 
 bts2 = Bts()
@@ -126,5 +120,7 @@ bts2.insert(0)
 bts2.insert(2)
 bts2.insert(5)
 bts2.insert(6)
+
+print(bts2.find(7))
 
 print(bts2)
