@@ -101,26 +101,134 @@ class Bts:
         return found
 
     def find(self, val):
-        if self._find(self.root, val, False):
-            return f"{val} is in the Tree"
-        else:
-            return f"{val} is not in the Tree"
+        return self._find(self.root, val, False)
+
+    def _successor(self, node):
+        n = node
+        successor = None
+        while n:
+            n = n.right
+            while n:
+                if n.val > node.val:
+                    successor = n.val
+                n = n.left
+            if successor:
+                return successor
+
+        n = node
+        while n:
+            n = n.parent
+            if n and n.val > node.val:
+                return n.val
+        return successor
+
+    def _delete(self, root, val):
+        if not root:
+            return
+
+        # case 0 root is val
+        if root.val == val:
+            root.val = self._successor(root)
+            self._delete(root.right, root.val)
+
+        # case 1 no children
+        if root.right and root.right.val == val and not root.right.right and not root.right.left:
+            root.right = None
+            return
+
+        if root.left and root.left.val == val and not root.left.right and not root.left.left:
+            root.left = None
+            return
+
+        # case 2 one children
+        if root.right and root.right.val == val and root.right.right and not root.right.left:
+            root.right = root.right.right
+            return
+        if root.right and root.right.val == val and not root.right.right and root.right.left:
+            root.right = root.right.left
+            return
+
+        if root.left and root.left.val == val and root.left.right and not root.left.left:
+            root.left = root.left.right
+            return
+
+        if root.left and root.left.val == val and not root.left.right and root.left.left:
+            root.left = root.left.left
+            return
+
+        # case 3 two children
+        if root.right and root.right.val == val and root.right.right and root.right.left:
+            root.right.val = self._successor(root.right)
+            self._delete(root.right.right, root.right.val)
+            return
+
+        if root.left and root.left.val == val and root.left.right and root.left.left:
+            root.left.val = self._successor(root.left)
+            self._delete(root.left.right, root.left.val)
+            return
+
+        if val > root.val:
+            self._delete(root.right, val)
+        if val < root.val:
+            self._delete(root.left, val)
 
     def delete(self, val):
-        pass
+        self._delete(self.root, val)
 
     def getRandomNode(self):
         pass
 
 
-bts2 = Bts()
-bts2.insert(4)
-bts2.insert(1)
-bts2.insert(0)
-bts2.insert(2)
-bts2.insert(5)
-bts2.insert(6)
+root = NodeB(35)
+root.left = NodeB(30)
+root.left.parent = root
+root.right = NodeB(40)
+root.right.parent = root
 
-print(bts2.find(7))
+# left side
+root.left.left = NodeB(27)
+root.left.left.parent = root.left
 
-print(bts2)
+root.left.left.left = NodeB(26)
+root.left.left.left.parent = root.left.left
+
+root.left.right = NodeB(33)
+root.left.right.parent = root.left
+
+root.left.right.left = NodeB(31)
+root.left.right.left.parent = root.left.right
+
+root.left.right.right = NodeB(34)
+root.left.right.right.parent = root.left.right
+
+# right side
+root.right.left = NodeB(37)
+root.right.left.parent = root.right
+
+root.right.right = NodeB(50)
+root.right.right.parent = root.right
+
+root.right.left.left = NodeB(36)
+root.right.left.left.parent = root.right.left
+
+root.right.left.right = NodeB(39)
+root.right.left.right.parent = root.right.left
+
+root.right.right.right = NodeB(60)
+root.right.right.right.parent = root.right.right
+
+root.right.right.left = NodeB(49)
+root.right.right.left.parent = root.right.right
+
+root.right.right.left.left = NodeB(46)
+root.right.right.left.left.parent = root.right.right.left
+
+
+bts = Bts()
+bts.root = root
+print(bts.find(7))
+print("\n")
+print(bts)
+bts.delete(40)
+
+print(bts)
