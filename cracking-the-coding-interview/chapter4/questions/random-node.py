@@ -1,8 +1,13 @@
+from random import randrange
+
+
 class NodeB:
     def __init__(self, key):
         self.left = None
         self.right = None
+        self.parent = None
         self.val = key
+        self.size = 0
 
     # https://stackoverflow.com/questions/34012886/print-binary-tree-level-by-level-in-python
     def display(self):
@@ -68,6 +73,7 @@ class Bts:
         return ""
 
     def _insert(self, val, root):
+        root.size += 1
         # find pos
         if root.right is not None and val > root.val:
             self._insert(val, root.right)
@@ -78,6 +84,7 @@ class Bts:
         if root.right is None and val > root.val:
             root.right = NodeB(val)
             return
+
         elif root.left is None and val < root.val:
             root.left = NodeB(val)
             return
@@ -126,6 +133,7 @@ class Bts:
         if not root:
             return
 
+        root.size -= 1
         # case 0 root is val
         if root.val == val:
             root.val = self._successor(root)
@@ -159,11 +167,13 @@ class Bts:
         # case 3 two children
         if root.right and root.right.val == val and root.right.right and root.right.left:
             root.right.val = self._successor(root.right)
+            root.right.size -= 1
             self._delete(root.right.right, root.right.val)
             return
 
         if root.left and root.left.val == val and root.left.right and root.left.left:
             root.left.val = self._successor(root.left)
+            root.left.size -= 1
             self._delete(root.left.right, root.left.val)
             return
 
@@ -175,60 +185,78 @@ class Bts:
     def delete(self, val):
         self._delete(self.root, val)
 
+    def _getSize(self, node):
+        if node is None:
+            return 0
+        else:
+            return node.size + 1
+
+    def _getRandomNode(self, node, randomNum):
+        if self._getSize(node.left) == randomNum:
+            return node.val
+        elif self._getSize(node.left) > randomNum:
+            return self._getRandomNode(node.left, randomNum)
+        else:
+            return self._getRandomNode(node.right, randomNum - 1 - self._getSize(node.left))
+
     def getRandomNode(self):
-        pass
+        randomNum = randrange(self.root.size + 1)
+        return self._getRandomNode(self.root, randomNum)
 
 
 root = NodeB(35)
-root.left = NodeB(30)
-root.left.parent = root
-root.right = NodeB(40)
-root.right.parent = root
-
-# left side
-root.left.left = NodeB(27)
-root.left.left.parent = root.left
-
-root.left.left.left = NodeB(26)
-root.left.left.left.parent = root.left.left
-
-root.left.right = NodeB(33)
-root.left.right.parent = root.left
-
-root.left.right.left = NodeB(31)
-root.left.right.left.parent = root.left.right
-
-root.left.right.right = NodeB(34)
-root.left.right.right.parent = root.left.right
-
-# right side
-root.right.left = NodeB(37)
-root.right.left.parent = root.right
-
-root.right.right = NodeB(50)
-root.right.right.parent = root.right
-
-root.right.left.left = NodeB(36)
-root.right.left.left.parent = root.right.left
-
-root.right.left.right = NodeB(39)
-root.right.left.right.parent = root.right.left
-
-root.right.right.right = NodeB(60)
-root.right.right.right.parent = root.right.right
-
-root.right.right.left = NodeB(49)
-root.right.right.left.parent = root.right.right
-
-root.right.right.left.left = NodeB(46)
-root.right.right.left.left.parent = root.right.right.left
 
 
 bts = Bts()
 bts.root = root
-print(bts.find(7))
-print("\n")
-print(bts)
-bts.delete(40)
+bts.insert(30)
+bts.insert(40)
+bts.insert(27)
+bts.insert(26)
+bts.insert(33)
+bts.insert(31)
+bts.insert(34)
+bts.insert(37)
+bts.insert(50)
+bts.insert(36)
+bts.insert(39)
+bts.insert(60)
+bts.insert(49)
+bts.insert(46)
 
+root.left.parent = root
+root.right.parent = root
+
+# left side
+root.left.left.parent = root.left
+
+root.left.left.left.parent = root.left.left
+
+root.left.right.parent = root.left
+
+root.left.right.left.parent = root.left.right
+
+root.left.right.right.parent = root.left.right
+
+# right side
+root.right.left.parent = root.right
+
+root.right.right.parent = root.right
+
+root.right.left.left.parent = root.right.left
+
+root.right.left.right.parent = root.right.left
+
+root.right.right.right.parent = root.right.right
+
+root.right.right.left.parent = root.right.right
+
+root.right.right.left.left.parent = root.right.right.left
+
+
+# print(bts.find(7))
+# print("\n")
+# print(bts)
+# bts.delete(40)
 print(bts)
+print(bts.getRandomNode())
