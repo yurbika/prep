@@ -24,7 +24,7 @@ def swap(num):
 print(swap(10))
 
 
-def rshift(val, n): return (val % 0x100000000) >> n
+def rshift(val, n): return (val % (1 << 32)) >> n
 
 
 def test(n):
