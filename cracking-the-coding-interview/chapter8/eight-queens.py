@@ -1,4 +1,4 @@
-x = 8
+x = 11  # results in 2680 possibilities
 test = 1
 
 
@@ -10,8 +10,8 @@ def nQueens(n):
 def isValid(board, y, x):
     cnt = 0
     for i in range(len(board)):
-        cnt += board[i][x]
-        cnt += board[y][i]
+        if cnt > 0:
+            break
         if y - i >= 0:
             cnt += board[y-i][x]
         if x - i >= 0:
@@ -37,9 +37,9 @@ def isValid(board, y, x):
 
 def solveNQueens(n, board):
     if n == x:
-        for row in board:
-            print(row)
-        print("\n")
+        # for row in board:
+        #     print(row)
+        # print("\n")
         global test
         print(test)
         test += 1
