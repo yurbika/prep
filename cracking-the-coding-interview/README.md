@@ -9,7 +9,7 @@
 5. [Chapter 5 - Bit Manipulation](chapter5): `7/ 8` complete.
 6. Chapter 6 - Math and Logic: `N/A` complete.
 7. Chapter 7 - Object Oriented Design: `N/A` complete.
-8. [Chapter 8 - Recursion and Dynamic Programming](chapter8): `8 / 14` complete.
+8. [Chapter 8 - Recursion and Dynamic Programming](chapter8): `14 / 14` complete.
 9. Chapter 9 - System Design and Scalability: `N/A` complete.
 10. Chapter 10 - Sorting and Searching: `0 / 11` complete.
 11. Chapter 11 - Testing: `N/A` complete.
