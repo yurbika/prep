@@ -3,8 +3,7 @@
 import random
 
 
-arr = [random.randint(-50, 150) for ele in range(25)]
-
+arr = [random.randint(-50, 10) for ele in range(25)]
 print(arr)
 
 
@@ -20,6 +19,11 @@ def sort(arr1, arr2):
         elif j < len(arr2) and arr2[j] < arr1[i]:
             temp.append(arr2[j])
             j += 1
+
+        elif i < len(arr1) and j < len(arr2) and arr1[i] == arr2[j]:
+            temp += [arr1[i], arr2[j]]
+            j += 1
+            i += 1
 
         if i == len(arr1):
             temp += arr2[j:]
