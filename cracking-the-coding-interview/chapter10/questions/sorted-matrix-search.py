@@ -9,6 +9,23 @@ arr1 = [
 ]
 
 
+def search(arr, target):
+    i = 0
+    j = len(arr[0])-1
+
+    while j != -1:
+        if target == arr[i][j]:
+            return [i, j]
+        if target < arr[i][j]:
+            j -= 1
+        if target > arr[i][j]:
+            i += 1
+
+    return -1
+
+
+print(search(arr1, 135))
+
 # every row is sorted and the first number in the next row is >= to the last item in the row before
 arr2 = [
     [0, 1, 2, 3],
