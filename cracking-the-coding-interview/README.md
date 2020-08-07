@@ -11,7 +11,7 @@
 7. Chapter 7 - Object Oriented Design: `N/A` complete.
 8. [Chapter 8 - Recursion and Dynamic Programming](chapter8): `14 / 14` complete.
 9. Chapter 9 - System Design and Scalability: `N/A` complete.
-10. Chapter 10 - Sorting and Searching: `0 / 11` complete.
+10. [Chapter 10 - Sorting and Searching](chapter10): `7 / 11` complete.
 11. Chapter 11 - Testing: `N/A` complete.
 12. Chapter 12 - C and C++: `N/A`
 13. Chapter 13 - Java: N/A
