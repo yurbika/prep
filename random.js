@@ -359,4 +359,4 @@ arr = [
 
 //console.dir(arr, { maxArrayLength: null });
 
-console.log(arr.length);
+console.log(Math.floor(Math.random() * arr.length) + 1);
