@@ -5,25 +5,10 @@
  */
 var strStr = function (haystack, needle) {
   if (needle.length === 0) return 0;
-  let left = 0;
-  let right = 0;
-  let p = 0;
-  while (right < haystack.length) {
-    if (haystack[right] === needle[p]) {
-      while (haystack[right] === needle[p] && p < needle.length) {
-        right++;
-        p++;
-      }
-      if (p === needle.length) return left;
-      else {
-        left++;
-        right = left;
-        p = 0;
-      }
-    } else {
-      left++;
-      right++;
-    }
+  let h = haystack.length;
+  let n = needle.length;
+  for (let i = 0; i < h - n + 1; i++) {
+    if (haystack.substring(i, i + n) === needle) return i;
   }
   return -1;
 };
