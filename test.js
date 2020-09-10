@@ -360,4 +360,4 @@ arr = [
 
 //console.dir(arr, { maxArrayLength: null });
 
-console.log(Math.floor(Math.random() * arr.length) + 1);
+console.log(arr[Math.floor(Math.random() * arr.length)]);
